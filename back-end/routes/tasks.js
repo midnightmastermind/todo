@@ -1,45 +1,28 @@
 const router = require('express').Router();
-const Task = require('../models/task.model');
+const task_controller = require('../controllers/task.controller');
 
-router.route('/').get((req, res) => {
-    Task.find()
-        .then(tasks => res.json(tasks))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+// GET request for creating task. NOTE This must come before route for id (i.e. display task).
+router.get('/create', task_controller.task_create_get);
 
-router.route('/add').post((req, res) => {
-    const title = req.body.title;
-    const listId = req.body.list;
-    const newTask = new Task({
-        title,
-        list: listId
-    });
+// POST request for creating task.
+router.post('/create', task_controller.task_create_post);
 
-    newTask.save()
-    .then(() => res.json('New Task added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+// GET request to delete task.
+router.get('/:id/delete', task_controller.task_delete_get);
 
-router.route('/:id').get((req, res) => {
-    Task.findById(req.params.id)
-        .then(task => res.json(task))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-router.route('/:id').delete((req, res) => {
-    Task.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Task deleted.'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-router.route('/update/:id').post((req, res) => {
-    Task.findById(req.params.id)
-        .then(task => {
-            task.title = req.body.title;
-            task.tasks = req.body.tasks;
-            task.save()
-                .then(() => res.json('Task updated!'))
-                .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+// POST request to delete task.
+router.post('/:id/delete', task_controller.task_delete_post);
+
+// GET request to update task.
+router.get('/:id/update', task_controller.task_update_get);
+
+// POST request to update task.
+router.post('/:id/update', task_controller.task_update_post);
+
+// GET request for one task.
+router.get('/:id', task_controller.task_detail);
+
+// GET request for list of all tasks.
+router.get('/', task_controller.tasks);
 
 module.exports = router;

@@ -15,7 +15,7 @@ class ListInput extends Component {
         const list = this.state;
         console.log(list)
         if(list.title && list.title.length > 0){
-            axios.post('/lists/add', list)
+            axios.post('/lists/create', list)
                 .then(res => {
                     if(res.data){
                         this.props.getLists();
@@ -38,9 +38,9 @@ class ListInput extends Component {
         let list = this.state;
 
         return (
-            <div>
+            <div class="add-list-form">
                 <input type="text" onChange={this.handleChange} value={list.title} />
-                <button onClick={this.addList}>add list</button>
+                <button onClick={this.addList}>+</button>
             </div>
         )
     }

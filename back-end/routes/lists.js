@@ -1,45 +1,29 @@
 const router = require('express').Router();
-const List = require('../models/list.model');
+const list_controller = require('../controllers/list.controller');
 
-router.route('/').get((req, res) => {
-    List.find()
-        .then(lists => res.json(lists))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+// GET request for creating a list. NOTE This must come before route that displays list (uses id).
+router.get('/create', list_controller.list_create_get);
 
-router.route('/add').post((req, res) => {
-    const title = req.body.title;
-    console.log(title);
-    const newList = new List({
-        title,
-        tasks: []
-    });
+//POST request for creating list.
+router.post('/create', list_controller.list_create_post);
 
-    newList.save()
-    .then(() => res.json('New List added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+// GET request to delete list.
+router.get(':id/delete', list_controller.list_delete_get);
 
-router.route('/:id').get((req, res) => {
-    List.findById(req.params.id)
-        .then(list => res.json(list))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-router.route('/:id').delete((req, res) => {
-    List.findByIdAndDelete(req.params.id)
-        .then(() => res.json('List deleted.'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-router.route('/update/:id').post((req, res) => {
-    List.findById(req.params.id)
-        .then(list => {
-            list.title = req.body.title;
-            list.tasks = req.body.tasks;
-            list.save()
-                .then(() => res.json('List updated!'))
-                .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-});
+// POST request to delete list.
+router.post(':id/delete', list_controller.list_delete_post);
+
+// GET request to update list.
+router.get('/:id/update', list_controller.list_update_get);
+
+// POST request to update list.
+router.post('/:id/update', list_controller.list_update_post);
+
+// GET request for one list.
+router.get('/:id', list_controller.list_detail);
+
+// GET request for list of all list.
+router.get('/', list_controller.lists);
+
 
 module.exports = router;

@@ -9,28 +9,32 @@ class List extends Component {
 
     render() {
         let list = this.props.list;
-        console.log(list)
+
         return (
-            <div>
-                <h2>{list.title}</h2>
-                <TaskInput list={list._id} getLists={this.props.getLists}/>
-                <ul>
-                  {
-                    list.tasks &&
-                      list.tasks > 0 ?
-                        (
-                          list.tasks.map(task => {
-                            return (
-                              <li key={task._id}>{task.title}</li>
+            <div class="list">
+                <div class="header">
+                    <div class="title">{list.title}</div>
+                    <TaskInput list={list._id} getLists={this.props.getLists}/>
+                </div>
+                <div class="tasks">
+                    <ul>
+                      {
+                        list.tasks &&
+                          list.tasks.length > 0 ?
+                            (
+                              list.tasks.map(task => {
+                                return (
+                                  <li key={task._id}>{task.title}</li>
+                                )
+                              })
                             )
-                          })
-                        )
-                        :
-                        (
-                          <li>No Tasks Created</li>
-                        )
-                  }
-                </ul>
+                            :
+                            (
+                              <li>No Tasks Created</li>
+                            )
+                      }
+                    </ul>
+                </div>
             </div>
         )
     }

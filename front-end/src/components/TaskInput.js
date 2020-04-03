@@ -12,9 +12,9 @@ class TaskInput extends Component {
     }
     addTask = () => {
         const task = {title: this.state.title, list: this.state.list}
-        console.log(task)
+
         if(task.title && task.title.length > 0){
-            axios.post('/tasks/add', task)
+            axios.post('/tasks/create', task)
                 .then(res => {
                     if(res.data){
                         this.props.getLists();
@@ -35,11 +35,10 @@ class TaskInput extends Component {
 
     render() {
         let task = this.state;
-        console.log(task)
         return (
-            <div>
+            <div class="add-task-form">
                 <input type="text" onChange={this.handleChange} value={task.title} />
-                <button onClick={this.addTask}>add task</button>
+                <button onClick={this.addTask}>+</button>
             </div>
         )
     }
