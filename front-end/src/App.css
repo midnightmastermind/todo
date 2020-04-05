@@ -1,19 +1,41 @@
 .App {
   text-align: center;
   font-size: calc(10px + 2vmin);
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px;
+  opacity: 0.6;
+}
+/* Scrollbar size */
+::-webkit-scrollbar {
+    width: 5px; /* To change vertical scrollbar width */
+    height: 5px; /* To change horizontal scrollbar height */
+}
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #3d3d42;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #5d5d5d;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #868686;
+}
+::-webkit-scrollbar-corner{
+    background-color: transparent;
 }
 
 input {
-  height: 40px;
   width: 100%;
   border: none;
+  filter: brightness(300%);
   border-bottom: 2px #101113 solid;
   background: none;
-  font-size: 1.5rem;
+  font-size: 12px;
   color: #787a80;
+  font-size: 19px;
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+     sans-serif;
 }
 
 input:focus {
@@ -21,10 +43,7 @@ input:focus {
 }
 
 button {
-  width: 25%;
-  height: 45px;
   border: none;
-  margin-left: 10px;
   font-size: 25px;
   background: #101113;
   border-radius: 5px;
@@ -39,14 +58,13 @@ button:focus {
 ul {
   list-style: none;
   text-align: left;
-  padding: 15px;
-  background: #171a1f;
+  padding: 0px 15px;
   border-radius: 5px;
 }
 
 li {
   padding: 15px;
-  font-size: 1.5rem;
+  font-size: 14px;
   margin-bottom: 15px;
   background: #282c34;
   border-radius: 5px;
@@ -57,58 +75,90 @@ li {
 .top-header {
     display: flex;
     flex-direction: row;
+    align-items: center;
     max-height: 90px;
+    border-bottom: 1px solid #343028;
 }
 .top-header .title {
     padding: 10px 25px;
-    font-size: 35px;
+    font-size: 17px;
+    filter: brightness(300%);
 }
 
 .top-header .add-list-form {
-    padding-top: 7px;
-    display: flex;
-}
-
-.top-header .add-list-form button{
-    width: 50px;
+    width: 27px;
 }
 
 .lists {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .lists .list {
-    min-height: 100%;
     margin: 10px;
     width: 300px;
+    height: 390px;
+    border-radius: 5px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.5);
+    transition: filter 2s;
+    opacity: .6;
+    background-color: rgba(211,110,45,.1);
 }
 
-.lists .add-task-form {
-    display: flex;
-}
+.add-list-form button {
+    height: 30px;
+    width: 30px;
+    color: #101113;
+    background-color: #78AF9F;
+    text-align: center;
 
-.lists .add-task-form button {
-    width: 50px;
+}
+.delete-list-form button {
+    height: 30px;
+    width: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #101113;
+    background-color: rgb(190,62,32);
+    text-align: center;
 }
 
 .list .header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     margin-left: 5px;
+    padding-top: 5px;
+    padding-right: 5px;
 }
 
 .list .header .title {
-    font-size: 20px;
+    font-size: 14px;
     flex-basis: 200px;
     padding-top: 10px;
     padding-left: 10px;
     display: flex;
+    filter: brightness(300%);
 }
 
 .tasks {
-    height: auto;
+    height: 285px;
+    overflow: hidden;
 }
-.tasks ul {
-    height: 100%;
+.tasks.scrollbar:hover{
+    overflow-y: scroll;
+}
+
+.tasks ul li {
+    background-color: #171a1f;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.none {
+    text-align: center;
 }

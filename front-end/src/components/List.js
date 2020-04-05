@@ -1,22 +1,24 @@
 
 import React, { Component } from 'react';
-import TaskInput from './TaskInput';
-
+import AddButton from './AddButton';
+import DeleteButton from './DeleteButton';
+import Input from './Input';
 class List extends Component {
     constructor(props) {
         super(props);
+
     }
 
     render() {
         let list = this.props.list;
-
         return (
-            <div class="list">
-                <div class="header">
-                    <div class="title">{list.title}</div>
-                    <TaskInput list={list._id} getLists={this.props.getLists}/>
+            <div className="list">
+                <div className="header">
+                    <div className="title"><Input title={list.title} /></div>
+                    <AddButton list={list._id} component="tasks" getComponent={this.props.getLists}/>
+                    <DeleteButton id={list._id} component="lists" getComponent={this.props.getLists} />
                 </div>
-                <div class="tasks">
+                <div className={`tasks ${list.tasks.length > 3 ? "scrollbar" : ""} `}>
                     <ul>
                       {
                         list.tasks &&
@@ -24,13 +26,13 @@ class List extends Component {
                             (
                               list.tasks.map(task => {
                                 return (
-                                  <li key={task._id}>{task.title}</li>
+                                  <li key={task._id}><Input title={task.title} /><DeleteButton id={task._id} component="tasks" getComponent={this.props.getLists}/></li>
                                 )
                               })
                             )
                             :
                             (
-                              <li>No Tasks Created</li>
+                              <div className="none">No Tasks Created</div>
                             )
                       }
                     </ul>

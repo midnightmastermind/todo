@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 //create schema
 const TaskSchema = new Schema({
-    title: { type: String, required: [true, 'The todo text field is required']},
+    title: { type: String },
     list: { type: mongoose.Schema.Types.ObjectId, ref: 'List'}
 })
 

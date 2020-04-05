@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import ListInput from './ListInput';
+import AddButton from './AddButton';
 import List from './List';
 
 class Todo extends Component {
@@ -10,7 +10,7 @@ class Todo extends Component {
 
             this.state = {
                     lists:[]
-            }
+            };
     }
 
     componentDidMount(){
@@ -34,17 +34,16 @@ class Todo extends Component {
 
         return(
             <div>
-                <div class="top-header">
-                        <div class="title">My Planner Application</div>
-                        <ListInput getLists={this.getLists}/>
+                <div className="top-header">
+                        <div className="title">My Planner Application</div>
+                        <AddButton getComponent={this.getLists} component="lists"/>
                 </div>
-                <div class="lists">
+                <div className="lists">
                     {
                         lists &&
                             lists.length > 0 ?
                                 (
                                     lists.map(list => {
-                                        console.log(list)
                                         return (
                                             <List key={list._id} list={list} getLists={this.getLists}/>
                                         )
@@ -52,7 +51,7 @@ class Todo extends Component {
                                 )
                                 :
                                 (
-                                    <li>No Lists Created</li>
+                                    <div className="none">No Lists Created</div>
                                 )
                     }
                 </div>

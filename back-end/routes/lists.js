@@ -8,10 +8,10 @@ router.get('/create', list_controller.list_create_get);
 router.post('/create', list_controller.list_create_post);
 
 // GET request to delete list.
-router.get(':id/delete', list_controller.list_delete_get);
+router.get('/:id/delete', list_controller.list_delete_get);
 
 // POST request to delete list.
-router.post(':id/delete', list_controller.list_delete_post);
+router.post('/:id/delete', list_controller.list_delete_post);
 
 // GET request to update list.
 router.get('/:id/update', list_controller.list_update_get);
