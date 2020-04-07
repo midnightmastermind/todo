@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
 class Input extends Component {
 
   constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
+      this.onBlur = this.onBlur.bind(this);
+
       this.state = {
-          input: this.props.title
+          input: this.props.title,
+          component: this.props.component,
+          id: this.props.id
       }
   }
 
-  onSubmit = () => {
-    if(this.state.input && this.state.input > 0){
-      axios.post('/api/todos', this.state.input)
-        .then(res => {
-          if(res.data){
-            this.setState({input: ""})
-          }
-        })
-        .catch(err => console.log(err))
-    }else {
-      console.log('input field required')
+  onBlur = (e) => {
+    const title = {
+        title : this.state.input
     }
+    axios.post(`/${this.state.component}/${this.state.id}/update`, title)
+    .then(res => {
+         console.log('Component Updated')
+    })
+    .catch(err => console.log(err))
+    this.setState({ showDelete: false});
   }
 
   handleChange = (e) => {
@@ -35,8 +36,8 @@ class Input extends Component {
   render() {
     let { input } = this.state;
     return (
-      <div>
-        <input type="text" onChange={this.handleChange} value={input} />
+      <div className="container">
+        <input type="text" onChange={this.handleChange} value={input} onBlur={this.onBlur} />
       </div>
     )
   }

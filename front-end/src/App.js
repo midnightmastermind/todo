@@ -1,12 +1,14 @@
 import React from 'react';
-import Todo from './components/Todo';
+import AppElement from './components/AppElement';
+
 import './App.css';
-import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const App = () => {
+
+
   return (
     <div className="App">
-      <Todo />
+      <AppElement />
     </div>
   );
 }

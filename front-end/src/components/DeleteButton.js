@@ -21,7 +21,7 @@ class DeleteButton extends Component {
     }
     render() {
         return (
-            <div className="delete-list-form">
+            <div className={`delete-list-form ${this.props.className}`}>
                 <button onClick={this.deleteComponent}>&#x1F5D1;</button>
             </div>
         )
